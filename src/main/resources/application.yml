@@ -1,0 +1,9 @@
+
+spring:
+  application:
+    name: future-bus
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: Test123456
