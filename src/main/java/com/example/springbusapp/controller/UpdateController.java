@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.bus.BusBridge;
 import org.springframework.cloud.bus.event.PathDestinationFactory;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UpdateController {
@@ -25,7 +22,16 @@ public class UpdateController {
     @RequestMapping(value="/notify", method = RequestMethod.GET)
     public String update(@RequestParam String msg){
 
-        FooRemoteApplicationEvent event = new FooRemoteApplicationEvent(this,"random", new PathDestinationFactory().getDestination(application),msg);
+        FooRemoteApplicationEvent event = new FooRemoteApplicationEvent(this,busId, new PathDestinationFactory().getDestination(application),msg);
+        busBridge.send(event);
+
+        return "ok";
+    }
+
+    @RequestMapping(value="/notify/{dest}", method = RequestMethod.GET)
+    public String update(@PathVariable String dest, @RequestParam String msg){
+
+        FooRemoteApplicationEvent event = new FooRemoteApplicationEvent(this,busId, new PathDestinationFactory().getDestination(dest),msg);
         busBridge.send(event);
 
         return "ok";

@@ -1,7 +1,8 @@
-
+server:
+  port: 8080
 spring:
   application:
-    name: future-bus
+    name: alpha
   rabbitmq:
     host: localhost
     port: 5672
