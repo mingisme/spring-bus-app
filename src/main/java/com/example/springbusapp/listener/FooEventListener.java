@@ -15,9 +15,9 @@ public class FooEventListener implements ApplicationListener<FooRemoteApplicatio
     @Override
     public void onApplicationEvent(FooRemoteApplicationEvent fooRemoteApplicationEvent) {
         if(serviceMatcher.isForSelf(fooRemoteApplicationEvent)) {
-            System.out.printf(fooRemoteApplicationEvent.getMsg());
+            System.out.println(fooRemoteApplicationEvent.getMsg());
         }else{
-            System.out.printf("Unknown Event");
+            System.out.println("Unknown Event");
         }
     }
 }
